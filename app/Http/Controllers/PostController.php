@@ -22,6 +22,12 @@ class PostController extends Controller
 
     public function show($id)
     {
+        $posts = Post::with('writer:id, username')->findOrFail($id);
+        return new PostDetailResource($posts);
+    }
+
+    public function show2($id)
+    {
         $posts = Post::findOrFail($id);
         return new PostDetailResource($posts);
     }
