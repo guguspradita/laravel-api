@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Http\Resources\PostResource;
+use App\Http\Resources\PostDetailResource;
 
 class PostController extends Controller
 {
@@ -22,6 +23,6 @@ class PostController extends Controller
     public function show($id)
     {
         $posts = Post::findOrFail($id);
-        return new PostResource($posts);
+        return new PostDetailResource($posts);
     }
 }
