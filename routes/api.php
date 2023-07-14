@@ -9,7 +9,7 @@ use App\Http\Controllers\AuthenticationController;
 //     return $request->user();
 // });
 
-Route::middleware(['auth::sanctum'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/logout', [AuthenticationController::class, 'logout']);
     Route::get('/me', [AuthenticationController::class, 'me']);
 });
