@@ -13,9 +13,9 @@ class PostController extends Controller
     public function index()
     {
         // cara satu
-        $posts = Post::all(); 
+        $posts = Post::with('writer:id,username')->get(); 
         // return response()->json(['pusat' => $posts]);
-        return PostResource::collection($posts);
+        return PostDetailResource::collection($posts);
 
         // cara dua
         // return PostResource::collection(Post::all());
