@@ -43,10 +43,10 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
-            'title' => 'required|max:255',
-            'news_content' => 'required',
-        ]);
+        // $validated = $request->validate([
+        //     'title' => 'required|max:255',
+        //     'news_content' => 'required',
+        // ]);
      
         // The blog post is valid...
 

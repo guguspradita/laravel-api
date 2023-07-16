@@ -3,7 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthorsPost
@@ -15,7 +17,16 @@ class AuthorsPost
      */
     public function handle(Request $request, Closure $next): Response
     {
-        dd('Ini middleware baru');
+        // untuk mendapatkan user yang sedang login
+        $currentUser = Auth::user();
+        // untuk mendapatkan postingan yang ingin di update
+        $post = Post::findOrFail($request->id);
+
+        // cek apakah user id yang sedang login tidak sama dengan postingan id
+        if ($post->author != $currentUser->id) {
+            return response()->json(['message' => 'data not found'], 404);
+        }
+
         return $next($request);
     }
 }
