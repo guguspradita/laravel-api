@@ -43,13 +43,15 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
-        // $validated = $request->validate([
-        //     'title' => 'required|max:255',
-        //     'news_content' => 'required',
-        // ]);
-     
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'news_content' => 'required',
+        ]);
+      
         // The blog post is valid...
+        $post = Post::findOrFail($id);
+        $post->update($request->all());
 
-        
+        return new PostDetailResource($post->loadMissing('writer:id,username'));
     }
 }
