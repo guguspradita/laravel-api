@@ -22,6 +22,6 @@ class CommentController extends Controller
         $comment = Comment::create($request->all());
 
         // mengembalikan data berupa json
-        return response()->json($comment);
+        return response()->json($comment->loadMissing(['commentator']));
     }
 }
