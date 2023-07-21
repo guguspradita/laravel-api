@@ -57,7 +57,10 @@ class PostController extends Controller
 
     public function destroy($id)
     {
+        // cari id pada model post yang ingin dihapus
         $post = Post::findOrFail($id);
+
+        // lalu hapus menggunakan eloquent
         $post->delete();
 
         return new PostDetailResource($post->loadMissing('writer:id,username'));
