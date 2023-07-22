@@ -13,12 +13,13 @@ class PostController extends Controller
     public function index()
     {
         // cara satu
-        $posts = Post::with('writer:id,username')->get(); 
-        // return response()->json(['pusat' => $posts]);
-        return PostDetailResource::collection($posts);
+        // $posts = Post::with('writer:id,username')->get(); 
+        // // return response()->json(['pusat' => $posts]);
+        // return PostDetailResource::collection($posts);
 
         // cara dua
-        // return PostResource::collection(Post::all());
+        $post = Post::all();
+        return PostDetailResource::collection($post->loadMissing(['writer:id,username','comments:id,post_id,user_id,comments_content']));
     }
 
     public function show($id)
